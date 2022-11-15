@@ -11,7 +11,7 @@ import {
 } from "@/utils/appwrite.databases.server";
 import { useEffect, useState } from "react";
 
-export default function Page({ params }: { params: { $id: string } }) {
+export default function Page({ params }: { params: { id: string } }) {
   const [game, setGame] = useState<null | Game>(null);
   const [moves, setMoves] = useState<Move[]>([]);
 
@@ -20,18 +20,18 @@ export default function Page({ params }: { params: { $id: string } }) {
 
   useEffect(() => {
     let unsubscribes: any[] = [];
-    if (params?.$id) {
+    if (params?.id) {
       (async () => {
         try {
           // Get initial game detail
-          setGame(await getGame(params.$id));
+          setGame(await getGame(params.id));
 
           // setup subscriptions
-          const u1 = subscribeGame(params.$id, (game) => {
+          const u1 = subscribeGame(params.id, (game) => {
             setGame(game);
           });
 
-          const u2 = subscribeGameMoves(params.$id, (move) => {
+          const u2 = subscribeGameMoves(params.id, (move) => {
             setMoves((prevMoves) => [...prevMoves, move]);
           });
           unsubscribes = [u1, u2];
