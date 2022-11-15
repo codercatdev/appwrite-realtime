@@ -67,7 +67,8 @@ export default function Page({ params }: { params: { $id: string } }) {
         <h1 className="text-2xl font-bold">
           Game: {game ? game?.name : `Loading...`}
         </h1>
-        <div className="grid grid-cols-2">
+        <h2>Are you Good ⬅️ or ➡️ Evil?</h2>
+        <div className="grid grid-cols-2 mt-4 md:mt-10">
           <div className="grid grid-rows-2">
             <p className="text-2xl font-bold">Good: {game?.good}</p>
             <p className="text-8xl">{good && "🦸"}</p>
