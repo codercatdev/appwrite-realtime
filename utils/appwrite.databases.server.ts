@@ -47,6 +47,7 @@ export const subscribeGame = (
 
 export interface Move extends Models.Document {
   good: boolean;
+  game_id: string;
 }
 
 export const createMove = (good: boolean, game_id: string) => {
@@ -55,5 +56,21 @@ export const createMove = (good: boolean, game_id: string) => {
     "moves",
     ID.unique(),
     { good, game_id }
+  );
+};
+
+export const subscribeGameMoves = (
+  $id: string,
+  cb: (value: Move) => void | PromiseLike<void>
+) => {
+  console.log("sub");
+  return client.subscribe(
+    `databases.appwrite-realtime-db.collections.moves.documents`,
+    (response) => {
+      const move = response.payload as Move;
+      if (move.game_id === $id) {
+        cb(move);
+      }
+    }
   );
 };
