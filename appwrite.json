@@ -4,8 +4,8 @@
     "collections": [
         {
             "$id": "moves",
-            "$createdAt": "2022-11-15T13:35:53.886+00:00",
-            "$updatedAt": "2022-11-15T13:41:47.216+00:00",
+            "$createdAt": "2022-11-15T17:21:38.388+00:00",
+            "$updatedAt": "2022-11-15T17:21:38.388+00:00",
             "$permissions": [
                 "create(\"any\")",
                 "read(\"any\")"
@@ -16,16 +16,15 @@
             "documentSecurity": false,
             "attributes": [
                 {
-                    "key": "session_id",
-                    "type": "string",
+                    "key": "good",
+                    "type": "boolean",
                     "status": "available",
-                    "required": true,
+                    "required": false,
                     "array": false,
-                    "size": 255,
-                    "default": null
+                    "default": false
                 },
                 {
-                    "key": "move",
+                    "key": "game_id",
                     "type": "string",
                     "status": "available",
                     "required": true,
@@ -36,24 +35,24 @@
             ],
             "indexes": [
                 {
-                    "key": "createdAt",
+                    "key": "game_id",
                     "type": "key",
                     "status": "available",
                     "attributes": [
-                        "session_id",
-                        "$createdAt"
+                        "game_id",
+                        "good"
                     ],
                     "orders": [
                         "ASC",
-                        "DESC"
+                        "ASC"
                     ]
                 }
             ]
         },
         {
             "$id": "games",
-            "$createdAt": "2022-11-15T14:05:44.404+00:00",
-            "$updatedAt": "2022-11-15T14:05:51.568+00:00",
+            "$createdAt": "2022-11-15T17:21:42.515+00:00",
+            "$updatedAt": "2022-11-15T17:21:42.515+00:00",
             "$permissions": [
                 "read(\"any\")",
                 "create(\"any\")"
@@ -64,6 +63,16 @@
             "documentSecurity": false,
             "attributes": [
                 {
+                    "key": "evil",
+                    "type": "integer",
+                    "status": "available",
+                    "required": false,
+                    "array": false,
+                    "min": -9223372036854775808,
+                    "max": 9223372036854775807,
+                    "default": 0
+                },
+                {
                     "key": "name",
                     "type": "string",
                     "status": "available",
@@ -71,9 +80,38 @@
                     "array": false,
                     "size": 255,
                     "default": null
+                },
+                {
+                    "key": "good",
+                    "type": "integer",
+                    "status": "available",
+                    "required": false,
+                    "array": false,
+                    "min": -9223372036854775808,
+                    "max": 9223372036854775807,
+                    "default": 0
                 }
             ],
             "indexes": []
+        }
+    ],
+    "functions": [
+        {
+            "$id": "score_keeper",
+            "name": "score_keeper",
+            "runtime": "node-16.0",
+            "path": "functions/score_keeper",
+            "entrypoint": "src/index.js",
+            "ignore": [
+                "node_modules",
+                ".npm"
+            ],
+            "execute": [],
+            "events": [
+                "databases.appwrite-realtime-db.collections.moves.documents.*.create"
+            ],
+            "schedule": "",
+            "timeout": 15
         }
     ]
 }
