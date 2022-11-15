@@ -42,7 +42,7 @@ export default function RootLayout({
                     Realtime
                   </Link>
                 </div>
-                <div className="flex-1 hidden lg:block">
+                {/* <div className="flex-1 hidden lg:block">
                   <ul className="p-0 menu menu-horizontal">
                     <li className="hidden lg:block">
                       <Link href="/emoji" className="text-xl normal-case">
@@ -55,7 +55,7 @@ export default function RootLayout({
                       </Link>
                     </li>
                   </ul>
-                </div>
+                </div> */}
                 <ThemeChangerDropdown />
                 {/* <div className="flex-none hidden lg:block">
               {user ? (
