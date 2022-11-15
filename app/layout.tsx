@@ -98,6 +98,12 @@ export default function RootLayout({
                 >
                   Appwrite Repo
                 </a>
+                <a
+                  className="link link-hover"
+                  href="https://github.com/codercatdev/appwrite-realtime"
+                >
+                  appwrite-realtime Repo
+                </a>
               </div>
             </footer>
           </div>
