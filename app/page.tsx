@@ -1,7 +1,7 @@
 "use client";
 
 import { createGame } from "@/utils/appwrite.databases.server";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 export default function Page() {
   const [name, setName] = useState("");
@@ -9,7 +9,8 @@ export default function Page() {
   const [error, setError] = useState(false);
   const router = useRouter();
 
-  const create = async () => {
+  const create = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     try {
       setSubmit(true);
       const game = await createGame(name);

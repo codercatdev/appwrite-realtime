@@ -11,7 +11,7 @@ client
   .setProject(config.projectId); // Your project ID
 export const databases = db;
 
-export const createGame = async (name: string) => {
+export const createGame = (name: string) => {
   return databases.createDocument(
     "appwrite-realtime-db",
     "games",
@@ -24,7 +24,7 @@ export interface Game extends Models.Document {
   name: string;
 }
 
-export const getGame = async ($id: string) => {
+export const getGame = ($id: string) => {
   return databases.getDocument(
     "appwrite-realtime-db",
     "games",
